@@ -6,7 +6,7 @@
 #    By: hsebille <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/03 17:38:29 by hsebille          #+#    #+#              #
-#    Updated: 2023/04/07 15:13:58 by hsebille         ###   ########.fr        #
+#    Updated: 2023/04/10 16:39:36 by hsebille         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Wextra -Werror
 
 NAME = philo
 
-SRCS = core/philo.c core/parsing.c utils/ft_atoi.c \
+SRCS = core/philo.c core/parsing.c utils/ft_atoi.c utils/ft_calloc.c \
+	   core/main.c core/init_philo.c utils/ft_bzero.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -26,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -g $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -g -pthread $(OBJS) -o $(NAME)
 
 clean:
 	/bin/rm -f $(OBJS)

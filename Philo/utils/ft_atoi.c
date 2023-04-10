@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:35:33 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/07 15:13:36 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/10 11:05:07 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int	ft_atoi(const char *nptr)
 		i++;
 	else if (nptr[i] == '-')
 		return (-1);
-	while (nptr[i] >= '0' && nptr[i] <= '9' && nptr[i])
+	while (nptr[i] != '\0')
 	{
+		if (nptr[i] < '0' || nptr[i] > '9')
+			return (-1);
 		nb = nb * 10 + nptr[i] - '0';
 		i++;
 		if (ft_overflow(nb) == -1)
