@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   gettime.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 14:31:06 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/11 15:48:41 by hsebille         ###   ########.fr       */
+/*   Created: 2023/04/11 13:49:23 by hsebille          #+#    #+#             */
+/*   Updated: 2023/04/11 14:16:38 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+long int	gettime(void)
 {
-	t_philo			*philo;
-	t_data			data;
-	pthread_mutex_t	*forks;
-	int				parsing_check;
+	struct timeval	tv;
+	long int		time;
+	int				check;
 
-	(void)philo;
-	parsing_check = parsing(&data, argc, argv);
-	if (parsing_check == -1)
-		return (1);
-	philo = ft_calloc(sizeof(t_philo), data.nb_philo);
-	forks = ft_calloc(sizeof(pthread_mutex_t), data.nb_philo);
-	if (philo == NULL || forks == NULL)
-		return (1);
-	philo_thread(philo, &data, forks);
-	return (0);
+	check = gettimeofday(&tv, NULL);
+	if (check == -1)
+		return (-1);
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (time);
+}
+
+long int	get_timestamp(long int start)
+{
+	long int	timestamp;
+
+	timestamp = gettime() - start;
+	return (timestamp);
 }
