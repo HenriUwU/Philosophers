@@ -6,13 +6,13 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:13:59 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/11 17:13:52 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/14 10:45:50 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_mutexes(pthread_mutex_t *forks, t_philo *philo, int nb_philo)
+int	init_mutexes(t_data *data, t_philo *philo, int nb_philo)
 {
 	int	mutex_check;
 
@@ -20,7 +20,8 @@ int	init_mutexes(pthread_mutex_t *forks, t_philo *philo, int nb_philo)
 	while (nb_philo > 0)
 	{
 		nb_philo--;
-		mutex_check = pthread_mutex_init(&forks[nb_philo], NULL);
+		mutex_check = pthread_mutex_init(&data->forks[nb_philo].fork_mutex, \
+				NULL);
 		if (mutex_check != 0)
 			return (-1);
 	}
@@ -30,7 +31,7 @@ int	init_mutexes(pthread_mutex_t *forks, t_philo *philo, int nb_philo)
 	return (0);
 }
 
-int	init_philo(t_philo *philo, t_data *data, pthread_mutex_t *forks)
+int	init_philo(t_philo *philo, t_data *data)
 {
 	int	i;
 
@@ -40,11 +41,11 @@ int	init_philo(t_philo *philo, t_data *data, pthread_mutex_t *forks)
 		philo[i].philo_id = i + 1;
 		philo[i].data = data;
 		philo[i].nb_meals_eaten = 0;
-		philo[i].left_fork = &forks[i];
+		philo[i].left_fork = &data->forks[i];
 		if (philo[i].philo_id == data->nb_philo)
-			philo[i].right_fork = &forks[0];
+			philo[i].right_fork = &data->forks[0];
 		else
-			philo[i].right_fork = &forks[i + 1];
+			philo[i].right_fork = &data->forks[i + 1];
 		i++;
 	}
 	return (0);

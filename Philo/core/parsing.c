@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:57:43 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/11 14:17:11 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/14 15:42:18 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	parsing(t_data *data, int argc, char **argv)
 		return (-1);
 	}
 	data->times_philo_must_eat = 1;
-	data->ac = argc;
 	data->nb_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);

@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:58:21 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/11 17:18:03 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:45:15 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@ void	*routine(void *param)
 	while (1)
 	{
 		philo_eat(philo);
+		philo_sleep(philo);
 	}
 	return (NULL);
 }
 
-int	philo_thread(t_philo *philo, t_data *data, pthread_mutex_t *forks)
+int	philo_thread(t_philo *philo, t_data *data)
 {
 	int	i;
 	int	protection;
 
 	i = 0;
-	init_mutexes(forks, philo, data->nb_philo);
-	init_philo(philo, data, forks);
+	init_mutexes(data, philo, data->nb_philo);
+	init_philo(philo, data);
 	while (i < data->nb_philo)
 	{
 		protection = pthread_create(&philo[i].thread_id, NULL,
