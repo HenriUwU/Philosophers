@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:13:59 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/14 10:45:50 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/18 17:26:31 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	init_mutexes(t_data *data, t_philo *philo, int nb_philo)
 {
 	int	mutex_check;
 
+	(void)philo;
 	mutex_check = 0;
 	while (nb_philo > 0)
 	{
@@ -25,7 +26,7 @@ int	init_mutexes(t_data *data, t_philo *philo, int nb_philo)
 		if (mutex_check != 0)
 			return (-1);
 	}
-	mutex_check = pthread_mutex_init(&philo->nb_meals_mutex, NULL);
+	mutex_check = pthread_mutex_init(&philo->printf_mutex, NULL);
 	if (mutex_check != 0)
 		return (-1);
 	return (0);

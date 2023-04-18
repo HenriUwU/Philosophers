@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:57:43 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/14 15:42:18 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/18 11:53:25 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	parsing(t_data *data, int argc, char **argv)
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
+	data->philo_satiated = 0;
+	data->is_dead = 0;
 	data->start = gettime();
 	if (argc == 6)
 		data->times_philo_must_eat = ft_atoi(argv[5]);

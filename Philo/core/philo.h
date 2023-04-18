@@ -6,7 +6,7 @@
 /*   By: hsebille <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 14:05:22 by hsebille          #+#    #+#             */
-/*   Updated: 2023/04/14 15:18:06 by hsebille         ###   ########.fr       */
+/*   Updated: 2023/04/18 16:40:17 by hsebille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_data
 	int			time_to_eat;
 	int			time_to_sleep;
 	int			times_philo_must_eat;
+	int			is_dead;
+	int			philo_satiated;
 	long int	start;
 	t_fork		*forks;
 }	t_data;
@@ -47,10 +49,9 @@ typedef struct s_philo
 	pthread_t			thread_id;
 	t_fork				*left_fork;
 	t_fork				*right_fork;
-	pthread_mutex_t		nb_meals_mutex;
 	pthread_mutex_t		printf_mutex;
-	pthread_mutex_t		nb_forks_mutex;
-	pthread_mutex_t		last_time_eaten_mutex;
+	pthread_mutex_t		is_dead_mutex;
+	pthread_mutex_t		philo_satiated_mutex;
 }	t_philo;
 
 int			args_check(t_data *data);
@@ -59,10 +60,12 @@ int			init_mutexes(t_data *data, t_philo *philo, int nb_philo);
 int			philo_thread(t_philo *philo, t_data *data);
 int			parsing(t_data *data, int argc, char **argv);
 int			ft_atoi(const char *nptr);
+void		is_philo_dead(t_philo *philo);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		ft_bzero(void *s, size_t n);
 void		philo_eat(t_philo *philo);
 void		philo_sleep(t_philo *philo);
+void		print_death(t_philo *philo);
 long int	gettime(void);
 long int	get_timestamp(long int start);
 
